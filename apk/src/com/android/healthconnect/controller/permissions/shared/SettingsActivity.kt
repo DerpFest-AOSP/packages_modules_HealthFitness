@@ -35,6 +35,7 @@ package com.android.healthconnect.controller.permissions.shared
 
 import android.content.Intent.EXTRA_PACKAGE_NAME
 import android.os.Bundle
+import android.view.WindowManager
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.activity.viewModels
 import androidx.core.os.bundleOf
@@ -66,6 +67,8 @@ class SettingsActivity : Hilt_SettingsActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        // This flag ensures a non system app cannot show an overlay on Health Connect. b/313425281
+        window.addSystemFlags(WindowManager.LayoutParams.SYSTEM_FLAG_HIDE_NON_SYSTEM_OVERLAY_WINDOWS)
         setContentView(R.layout.activity_settings)
         setTitle(R.string.permgrouplab_health)
 
